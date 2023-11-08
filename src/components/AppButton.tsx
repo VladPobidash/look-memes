@@ -1,4 +1,4 @@
-import SvgIcon from "@/components/SvgIcon";
+import SvgIcon from '@/components/SvgIcon'
 
 interface AppButtonProps {
     text?: string
@@ -26,7 +26,7 @@ export default function AppButton({text, color, outlined, height, icon, classNam
             onClick={onClick}>
             {icon
                 ? <SvgIcon width={icon.width || 20} height={icon.height || 20} name={icon.name}
-                           alt='btn-icon'
+                           alt="btn-icon"
                            className="mr-2.5"/>
                 : null
             }

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image'
 
 export default function SvgIcon({name, width, height, className, alt, onClick}: {
     name: string
