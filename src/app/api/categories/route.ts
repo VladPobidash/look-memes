@@ -28,9 +28,9 @@ router
     })
 
 export async function GET(request: NextRequest, ctx: { params?: unknown }) {
-    return router.run(request, ctx)
+    return router.run(request, ctx) as Promise<void | Response>
 }
 
 export async function POST(request: NextRequest, ctx: { params?: unknown }) {
-    return router.run(request, ctx)
+    return router.run(request, ctx) as Promise<void | Response>
 }
