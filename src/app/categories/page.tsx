@@ -96,9 +96,9 @@ export default function Categories() {
         setItems(updated)
     }
 
-    const confirmDelete = (id: string, confirmed: boolean = false) => {
-        if (confirmed) {
-            deleteCategory(id)
+    const confirmDelete = (id: string, deleteDraft: boolean = false) => {
+        if (deleteDraft) {
+            setItems(items.filter((c) => c.id !== id))
             return
         }
         setShowDialog(true)

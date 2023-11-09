@@ -10,7 +10,7 @@ interface Props {
     category: Category
     onSubmit: (category: Category) => void
     onToggle: (id: string) => void
-    onDelete: (id: string, confirmed?: boolean) => void
+    onDelete: (id: string, deleteDraft?: boolean) => void
 }
 
 export default function SortableCategory({category, onSubmit, onToggle, onDelete}: Props) {
@@ -50,8 +50,11 @@ export default function SortableCategory({category, onSubmit, onToggle, onDelete
 
     useEffect(() => {
         if (isNew) setIsEditing(true)
+    }, [isNew])
+
+    useEffect(() => {
         if (isEditing) setFocus('name')
-    }, [enabled, isEditing, isNew, setFocus])
+    }, [isEditing, setFocus])
 
     const handleDoubleClick = () => {
         if (!enabled) return
@@ -59,21 +62,22 @@ export default function SortableCategory({category, onSubmit, onToggle, onDelete
     }
 
     const handleBlur = () => {
-        // setIsEditing(false)
+        setIsEditing(false)
 
-        if (!field.value) onDelete(id, true)
+        if (!field.value && !name) onDelete(id, true)
         else if (!fieldState.invalid) onSubmit({...category, name: field.value})
     }
 
     return (
         <li ref={setNodeRef} style={style}
             className="flex justify-between items-center px-5 py-3 text-sm rounded border-2 border-[#323443]">
-            <div onDoubleClick={handleDoubleClick}>
+            <div className="pr-7" onDoubleClick={handleDoubleClick}>
                 {
                     isEditing
                         ? <input
                             {...field}
                             onBlur={handleBlur}
+                            autoComplete="off"
                             placeholder="Enter Category Name"
                             className="outline-none bg-transparent placeholder:text-[#696969]"
                         />
